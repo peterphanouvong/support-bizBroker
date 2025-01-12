@@ -6,7 +6,7 @@ import { parseWithZod } from "@conform-to/zod";
 import { siteSchema } from "./utils/zodSchemas";
 import { prisma } from "@/lib/prisma";
 
-export async function CreateSiteAction(prevState: any, formData: FormData) {
+export async function CreateListingAction(prevState: any, formData: FormData) {
   const { getUser } = getKindeServerSession();
 
   const user = await getUser();
@@ -21,7 +21,7 @@ export async function CreateSiteAction(prevState: any, formData: FormData) {
 
   if (submission.status !== "success") return submission.reply();
 
-  const response = await prisma.site.create({
+  const response = await prisma.listing.create({
     data: {
       description: submission.value.description,
       name: submission.value.name,

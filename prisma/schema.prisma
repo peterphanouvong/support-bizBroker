@@ -23,10 +23,10 @@ model User {
 
   createdAt DateTime @default(now())
 
-  Site Site[]
+  Listing Listing[]
 }
 
-model Site {
+model Listing {
   id           String   @id @default(uuid())
   name         String
   description  String
