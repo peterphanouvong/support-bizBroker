@@ -1,24 +1,21 @@
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { prisma } from "@/lib/prisma";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-
-import { FileIcon, PlusCircle } from "lucide-react";
+import { Book, FileIcon, PlusCircle, Settings } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import Image from "next/image";
-import DefaultImage from "@/public/default.png";
 
-async function getData(userId: string) {
-  const data = await prisma.listing.findMany({
+async function getData(userId: string, listingId: string) {
+  const data = await prisma.post.findMany({
     where: {
       userId: userId,
+      listingId: listingId,
+    },
+    select: {
+      image: true,
+      title: true,
+      createdAt: true,
+      id: true,
     },
     orderBy: {
       createdAt: "desc",
@@ -28,26 +25,43 @@ async function getData(userId: string) {
   return data;
 }
 
-export default async function SitesRoute() {
+export default async function ListingIdRoute({
+  params,
+}: {
+  params: { listingId: string };
+}) {
   const { getUser } = getKindeServerSession();
-
   const user = await getUser();
 
   if (!user) {
     return redirect("/api/auth/login");
   }
 
-  const data = await getData(user.id);
+  const data = await getData(user.id, params.listingId);
 
   return (
     <>
-      <div className="flex w-full justify-end ">
+      <div className="flex w-full justify-end gap-x-4">
+        <Button asChild variant={"secondary"}>
+          <Link href="#">
+            <Book className="mr-2 size-4" />
+            View Blog
+          </Link>
+        </Button>
+        <Button asChild variant={"secondary"}>
+          <Link href="#">
+            <Settings className="mr-2 size-4" />
+            Settings
+          </Link>
+        </Button>
         <Button asChild>
-          <Link href="/dashboard/sites/new">
-            <PlusCircle className="m-2 size-4" /> Create Listing
+          <Link href="#">
+            <PlusCircle className="mr-2 size-4" />
+            Create Article
           </Link>
         </Button>
       </div>
+
       {data === undefined || data.length === 0 ? (
         <div className="flex flex-col p-10 items-center justify-center rounded-md border border-dashed text-center animate-in gap-4 fade-in-50">
           <div className="flex size-20      items-center justify-center rounded-full bg-primary/10">
@@ -67,30 +81,7 @@ export default async function SitesRoute() {
           </Button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
-          {data.map((listing) => (
-            <Card key={listing.id}>
-              <Image
-                src={listing.imageUrl ?? DefaultImage}
-                alt={listing.name}
-                className="rounded-t-lg object-cover w-full h-[200px]"
-                width={400}
-                height={200}
-              />
-              <CardHeader>
-                <CardTitle>{listing.name}</CardTitle>
-                <CardDescription>{listing.description}</CardDescription>
-              </CardHeader>
-              <CardFooter>
-                <Button className="w-full">
-                  <Link href={`/dashboard/sites/${listing.id}`}>
-                    View Articles
-                  </Link>
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
+        <h1>Here is data</h1>
       )}
     </>
   );
