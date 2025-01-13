@@ -5,9 +5,14 @@ import Logo from "@/public/logo.svg";
 import { DashboardItems } from "@/components/dashboard/DashboardItems";
 import { CircleUser, DollarSign, Globe, Home } from "lucide-react";
 import { ModeToggle } from "@/components/dashboard/ModeToggle";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import {  LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 export const navLinks = [
   {
@@ -32,7 +37,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             <Link href="/" className="flex items-center gap-2 font-semibold">
               <Image src={Logo} alt="logo" className="h-8 w-8" />
               <h3 className="text-2xl">
-                Biz<span className="text-primary font-bold">Broker</span>
+                My<span className="text-primary font-bold">Business</span>
               </h3>
             </Link>
           </div>
@@ -49,16 +54,18 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             <ModeToggle />
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="secondary" size="icon" className="rounded-full">
+                <Button
+                  variant="secondary"
+                  size="icon"
+                  className="rounded-full"
+                >
                   <CircleUser className="h-5 w-5" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem>Profile</DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <LogoutLink>
-                    Logout
-                  </LogoutLink>
+                  <LogoutLink>Logout</LogoutLink>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

@@ -25,11 +25,10 @@ async function getData(userId: string, listingId: string) {
   return data;
 }
 
-export default async function ListingIdRoute({
-  params,
-}: {
-  params: { listingId: string };
+export default async function ListingIdRoute(props: {
+  params: Promise<{ listingId: string }>;
 }) {
+  const params = await props.params;
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
@@ -55,7 +54,7 @@ export default async function ListingIdRoute({
           </Link>
         </Button>
         <Button asChild>
-          <Link href="#">
+          <Link href={`/dashboard/sites/${params.listingId}/create`}>
             <PlusCircle className="mr-2 size-4" />
             Create Article
           </Link>
