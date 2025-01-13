@@ -1,3 +1,6 @@
+"use client";
+
+import { UploadDropzone } from "@/app/utils/UploadthingComponents";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -11,12 +14,15 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ArrowLeft, Atom } from "lucide-react";
 import Link from "next/link";
+import React from "react";
 
 export default function ArticleCreationRoute({
-  params,
+  params: initialParams,
 }: {
   params: { listingId: string };
 }) {
+  const params = React.use(initialParams);
+
   return (
     <>
       <div className="flex items-center">
@@ -52,6 +58,11 @@ export default function ArticleCreationRoute({
             <div className="grid gap-2">
               <Label>Small description</Label>
               <Textarea placeholder="Small description for your article..." />
+            </div>
+
+            <div className="grid gap-2">
+              <Label>Cover Image</Label>
+              <UploadDropzone endpoint="imageUploader" />
             </div>
           </form>
         </CardContent>
