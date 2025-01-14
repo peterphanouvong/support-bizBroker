@@ -48,9 +48,9 @@ export default async function ListingIdRoute(props: {
           </Link>
         </Button>
         <Button asChild variant={"secondary"}>
-          <Link href="#">
+          <Link href={`/dashboard/sites/${params.listingId}/test`}>
             <Settings className="mr-2 size-4" />
-            Settings
+            TestRoute
           </Link>
         </Button>
         <Button asChild>
