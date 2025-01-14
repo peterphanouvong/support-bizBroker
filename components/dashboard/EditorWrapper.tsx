@@ -25,7 +25,7 @@ const TailwindEditor = ({ onChange, initialValue }: EditorProps) => {
   return (
     <EditorRoot>
       <EditorContent
-        className="border p4 rounded"
+        className="border p4 rounded min-h-64"
         editorProps={{
           handleDOMEvents: {
             keydown: (_view, event) => handleCommandNavigation(event),
