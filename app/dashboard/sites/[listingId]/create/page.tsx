@@ -12,16 +12,25 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Toaster } from "@/components/ui/toaster";
 import { ArrowLeft, Atom } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
+import TailwindEditor from "@/components/dashboard/EditorWrapper";
+import { JSONContent } from "novel";
 
 export default function ArticleCreationRoute({
   params: initialParams,
 }: {
   params: { listingId: string };
 }) {
+  const [imageUrl, setImageUrl] = useState<undefined | string>(undefined);
   const params = React.use(initialParams);
+  const { toast } = useToast();
+  const [value, setValue] = useState<JSONContent | undefined>(undefined);
 
   return (
     <>
@@ -62,7 +71,36 @@ export default function ArticleCreationRoute({
 
             <div className="grid gap-2">
               <Label>Cover Image</Label>
-              <UploadDropzone endpoint="imageUploader" />
+              {imageUrl ? (
+                <Image
+                  src={imageUrl}
+                  alt="upload image"
+                  className="object-cover w-[200px] h-[200px] rounded-md"
+                  width={200}
+                  height={200}
+                />
+              ) : (
+                <UploadDropzone
+                  onClientUploadComplete={(res) => {
+                    setImageUrl(res[0].url);
+                    toast({
+                      title: "Upload Complete",
+                      description: "You should see your picture to the left.",
+                    });
+                  }}
+                  endpoint="imageUploader"
+                  onUploadError={() => {
+                    toast({
+                      title: "Upload Error",
+                      description: "It's probably too big.",
+                    });
+                  }}
+                />
+              )}
+            </div>
+            <div className="grid gap-2">
+              <Label>Article Content</Label>
+              <TailwindEditor onChange={setValue} initialValue={value} />
             </div>
           </form>
         </CardContent>
