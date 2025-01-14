@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Toaster } from "@/components/ui/toaster";
+
 import { ArrowLeft, Atom } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -92,6 +92,12 @@ export default function ArticleCreationRoute({
             onSubmit={form.onSubmit}
             action={action}
           >
+            <input
+              type="hidden"
+              name="listingId"
+              value={params.listingId}
+              key="listingId "
+            />
             <div className="grid gap-2">
               <Label>Article Name</Label>
               <Input

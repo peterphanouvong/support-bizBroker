@@ -5,6 +5,10 @@ import { Book, FileIcon, PlusCircle, Settings } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
+// RESTART HERE!
+// getData doesn't seem to be returning what i need.
+// test to see what gets sent back .
+
 async function getData(userId: string, listingId: string) {
   const data = await prisma.post.findMany({
     where: {
@@ -22,6 +26,8 @@ async function getData(userId: string, listingId: string) {
     },
   });
 
+  console.log(data, "data in [listingId] page inside getData");
+
   return data;
 }
 
@@ -37,6 +43,8 @@ export default async function ListingIdRoute(props: {
   }
 
   const data = await getData(user.id, params.listingId);
+
+  console.log(data);
 
   return (
     <>
