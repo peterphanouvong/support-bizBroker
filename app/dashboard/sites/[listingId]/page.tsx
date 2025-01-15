@@ -169,29 +169,25 @@ export default async function ListingIdRoute(props: {
                         }).format(item.createdAt)}
                       </TableCell>
                       <TableCell className="text-end">
-                        <Link
-                          href={`/dashboard/sites/${params.listingId}/${item.id}`}
-                        >
-                          <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                              <Button size={"icon"} variant={"ghost"}>
-                                <MoreHorizontal className="size-4" />
-                              </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end">
-                              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                              <DropdownMenuSeparator />
-                              <DropdownMenuItem asChild>
-                                <Link
-                                  href={`/dashboard/sites/${params.listingId}/${item.id}`}
-                                >
-                                  Edit
-                                </Link>
-                              </DropdownMenuItem>
-                              <DropdownMenuItem>Delete</DropdownMenuItem>
-                            </DropdownMenuContent>
-                          </DropdownMenu>
-                        </Link>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button size={"icon"} variant={"ghost"}>
+                              <MoreHorizontal className="size-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end">
+                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem asChild>
+                              <Link
+                                href={`/dashboard/sites/${params.listingId}/${item.id}`}
+                              >
+                                Edit
+                              </Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem asChild>Delete</DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
                       </TableCell>
                     </TableRow>
                   ))}
