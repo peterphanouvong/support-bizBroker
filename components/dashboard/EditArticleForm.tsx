@@ -26,12 +26,7 @@ import { PostSchema } from "@/app/utils/zodSchemas";
 import { CreatePostAction } from "@/app/actions";
 import slugify from "react-slugify";
 
-export function EditArticleForm({
-  params: initialParams,
-}: {
-  params: { listingId: string };
-}) {
-  const params = React.use(initialParams);
+export function EditArticleForm() {
   const { toast } = useToast();
 
   const [imageUrl, setImageUrl] = useState<undefined | string>(undefined);
