@@ -44,6 +44,7 @@ export async function CreatePostAction(prevState: any, formData: FormData) {
       slug: submission.value.slug,
       articleContent: JSON.parse(submission.value.articleContent),
       image: submission.value.coverImage,
+      userId: user.id,
       listingId: formData.get("listingId") as string,
     },
   });

@@ -26,6 +26,7 @@ import { parseWithZod } from "@conform-to/zod";
 import { PostSchema } from "@/app/utils/zodSchemas";
 import { useForm } from "@conform-to/react";
 import slugify from "react-slugify";
+import { SubmitButton } from "@/components/dashboard/SubmitButtons";
 
 export default function ArticleCreationRoute({
   params: initialParams,
@@ -195,9 +196,7 @@ export default function ArticleCreationRoute({
                 {fields.articleContent.errors}
               </p>
             </div>
-            <Button type="submit" className="w-fit">
-              Submit
-            </Button>
+            <SubmitButton text="Create Article" />
           </form>
         </CardContent>
       </Card>
