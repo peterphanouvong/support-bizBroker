@@ -41,8 +41,6 @@ import {
 // test to see what gets sent back .
 
 async function getData(userId: string, listingId: string) {
-  console.log(userId, listingId, "userId and listingId in getData");
-
   const data = await prisma.post.findMany({
     where: {
       userId: userId,
@@ -89,9 +87,9 @@ export default async function ListingIdRoute(props: {
           </Link>
         </Button>
         <Button asChild variant={"secondary"}>
-          <Link href={`/dashboard/sites/${params.listingId}/test`}>
+          <Link href={`/dashboard/sites/${params.listingId}/settings`}>
             <Settings className="mr-2 size-4" />
-            TestRoute
+            Settings
           </Link>
         </Button>
         <Button asChild>
@@ -185,7 +183,13 @@ export default async function ListingIdRoute(props: {
                                 Edit
                               </Link>
                             </DropdownMenuItem>
-                            <DropdownMenuItem asChild>Delete</DropdownMenuItem>
+                            <DropdownMenuItem asChild>
+                              <Link
+                                href={`/dashboard/sites/${params.listingId}/${item.id}/delete`}
+                              >
+                                Delete
+                              </Link>
+                            </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
                       </TableCell>

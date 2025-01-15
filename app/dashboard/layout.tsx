@@ -71,7 +71,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             </DropdownMenu>
           </div>
         </header>
-        <main className="flex-1 p-4 lg:p-6 lg:gap-6">{children}</main>
+        <main className="flex flex-1 flex-col p-4 lg:p-6 lg:gap-6">
+          {children}
+        </main>
       </div>
     </section>
   );

@@ -23,18 +23,30 @@ import { JSONContent } from "novel";
 import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { PostSchema } from "@/app/utils/zodSchemas";
-import { CreatePostAction } from "@/app/actions";
+import { EditPostActions } from "@/app/actions";
 import slugify from "react-slugify";
 
-export function EditArticleForm() {
+interface iAppProps {
+  title: string;
+  image: string;
+  id: string;
+  slug: string;
+  smallDescription: string;
+  articleContent: any;
+  listingId: string;
+}
+
+export function EditArticleForm({ data, listingId }: iAppProps) {
   const { toast } = useToast();
 
-  const [imageUrl, setImageUrl] = useState<undefined | string>(undefined);
-  const [value, setValue] = useState<JSONContent | undefined>(undefined);
-  const [slug, setSlugValue] = useState<undefined | string>(undefined);
-  const [title, setTitle] = useState<undefined | string>(undefined);
+  const [imageUrl, setImageUrl] = useState<undefined | string>(data.image);
+  const [value, setValue] = useState<JSONContent | undefined>(
+    data.articleContent
+  );
+  const [slug, setSlugValue] = useState<undefined | string>(data.slug);
+  const [title, setTitle] = useState<undefined | string>(data.title);
 
-  const [lastResult, action] = useActionState(CreatePostAction, undefined);
+  const [lastResult, action] = useActionState(EditPostActions, undefined);
   const [form, fields] = useForm({
     lastResult,
     onValidate({ formData }) {
@@ -64,7 +76,7 @@ export function EditArticleForm() {
   }
 
   return (
-    <Card>
+    <Card className="mt-5">
       <CardHeader>
         <CardTitle>Article Details</CardTitle>
         <CardDescription>
@@ -78,6 +90,8 @@ export function EditArticleForm() {
           onSubmit={form.onSubmit}
           action={action}
         >
+          <input type="hidden" name="articleId" value={data.id} />
+          <input type="hidden" name="listingId" value={listingId} />
           <div className="grid gap-2">
             <Label>Article Name</Label>
             <Input
@@ -116,7 +130,7 @@ export function EditArticleForm() {
             <Textarea
               key={fields.smallDescription.key}
               name={fields.smallDescription.name}
-              defaultValue={fields.smallDescription.initialValue}
+              defaultValue={data.smallDescription}
               placeholder="Small description for your article..."
             />
             <p className="text-red-500 text-sm">
@@ -175,7 +189,7 @@ export function EditArticleForm() {
               {fields.articleContent.errors}
             </p>
           </div>
-          <SubmitButton text="Create Article" />
+          <SubmitButton text="Edit Article" />
         </form>
       </CardContent>
     </Card>

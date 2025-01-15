@@ -8,10 +8,10 @@ export default function Home() {
   return (
     <div>
       <h1>Home</h1>
-      <Button>
+      <Button asChild>
         <RegisterLink>Register</RegisterLink>
       </Button>
-      <Button>
+      <Button asChild>
         <LoginLink>Login</LoginLink>
       </Button>
     </div>
