@@ -35,6 +35,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { EmptyState } from "@/components/dashboard/EmptyState";
 
 // RESTART HERE!
 // getData doesn't seem to be returning what i need.
@@ -101,23 +102,12 @@ export default async function ListingIdRoute(props: {
       </div>
 
       {data === undefined || data.length === 0 ? (
-        <div className="flex flex-col p-10 items-center justify-center rounded-md border border-dashed text-center animate-in gap-4 fade-in-50">
-          <div className="flex size-20      items-center justify-center rounded-full bg-primary/10">
-            <FileIcon className="size-10 text-primary" />
-          </div>
-          <h2 className="mt-6 text-xl font-semibold text-muted-foreground">
-            No listing created
-          </h2>
-          <p className="mt-2 text-sm text-center leading-6 text-muted-foreground max-w-sm mx-auto">
-            You currently dont have any listings. Please create one when you are
-            ready.
-          </p>
-          <Button asChild>
-            <Link href="/dashboard/sites/new">
-              <PlusCircle className="m-2 size-4" /> Create Listing
-            </Link>
-          </Button>
-        </div>
+        <EmptyState
+          title="No article created"
+          href={`/dashboard/sites/${params.listingId}/create`}
+          description="You currently dont have any articles. Please create one when you are ready."
+          buttonText="Create Article"
+        />
       ) : (
         <div>
           <Card>

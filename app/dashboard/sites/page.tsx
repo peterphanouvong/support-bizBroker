@@ -14,6 +14,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import Image from "next/image";
 import DefaultImage from "@/public/default.png";
+import { EmptyState } from "@/components/dashboard/EmptyState";
 
 async function getData(userId: string) {
   const data = await prisma.listing.findMany({
@@ -49,23 +50,12 @@ export default async function SitesRoute() {
         </Button>
       </div>
       {data === undefined || data.length === 0 ? (
-        <div className="flex flex-col p-10 items-center justify-center rounded-md border border-dashed text-center animate-in gap-4 fade-in-50">
-          <div className="flex size-20      items-center justify-center rounded-full bg-primary/10">
-            <FileIcon className="size-10 text-primary" />
-          </div>
-          <h2 className="mt-6 text-xl font-semibold text-muted-foreground">
-            No listing created
-          </h2>
-          <p className="mt-2 text-sm text-center leading-6 text-muted-foreground max-w-sm mx-auto">
-            You currently dont have any listings. Please create one when you are
-            ready.
-          </p>
-          <Button asChild>
-            <Link href="/dashboard/sites/new">
-              <PlusCircle className="m-2 size-4" /> Create Listing
-            </Link>
-          </Button>
-        </div>
+        <EmptyState
+          title="No listing created"
+          href="/dashboard/sites/new"
+          description="You currently dont have any listings. Please create one when you are ready."
+          buttonText="Create Listing"
+        />
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
           {data.map((listing) => (

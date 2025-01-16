@@ -3,15 +3,30 @@
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 import { parseWithZod } from "@conform-to/zod";
-import { PostSchema, siteSchema } from "./utils/zodSchemas";
+import {
+  ListingCreationSchema,
+  PostSchema,
+  siteSchema,
+} from "./utils/zodSchemas";
 import { prisma } from "@/lib/prisma";
 import { requireUser } from "./utils/requireUser";
 
 export async function CreateListingAction(prevState: any, formData: FormData) {
   const user = await requireUser();
 
-  const submission = parseWithZod(formData, {
-    schema: siteSchema,
+  const submission = await parseWithZod(formData, {
+    schema: ListingCreationSchema({
+      async isSubdirectoryUnique() {
+        const existingSubdirectory = await prisma.listing.findUnique({
+          where: {
+            subdirectory: formData.get("subdirectory") as string,
+          },
+        });
+
+        return !existingSubdirectory;
+      },
+    }),
+    async: true,
   });
 
   if (submission.status !== "success") return submission.reply();
