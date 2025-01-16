@@ -52,7 +52,13 @@ async function getData(userId: string, listingId: string) {
       title: true,
       createdAt: true,
       id: true,
+      Listing: {
+        select: {
+          subdirectory: true,
+        },
+      },
     },
+
     orderBy: {
       createdAt: "desc",
     },
@@ -82,7 +88,7 @@ export default async function ListingIdRoute(props: {
     <>
       <div className="flex w-full justify-end gap-x-4">
         <Button asChild variant={"secondary"}>
-          <Link href="#">
+          <Link href={`/blog/${data[0].Listing?.subdirectory}`}>
             <Book className="mr-2 size-4" />
             View Blog
           </Link>
