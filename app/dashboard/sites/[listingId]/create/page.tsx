@@ -36,7 +36,7 @@ export default function ArticleCreationRoute({
   const [imageUrl, setImageUrl] = useState<undefined | string>(undefined);
   const params = React.use(initialParams);
   const { toast } = useToast();
-  const [value, setValue] = useState<JSONContent | undefined>(undefined);
+  const [value, setValue] = useState<JSONContent | string>("");
   const [slug, setSlugValue] = useState<undefined | string>(undefined);
   const [title, setTitle] = useState<undefined | string>(undefined);
   const [lastResult, action] = useActionState(CreatePostAction, undefined);
@@ -97,7 +97,7 @@ export default function ArticleCreationRoute({
               type="hidden"
               name="listingId"
               value={params.listingId}
-              key="listingId "
+              key="listingId"
             />
             <div className="grid gap-2">
               <Label>Article Name</Label>

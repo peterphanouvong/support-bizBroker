@@ -23,8 +23,8 @@ export function ListingCreationSchema(options?: {
       .string()
       .min(1)
       .max(40)
-      .regex(/^[a-z]+$/, "Subdirectory must be lowercase")
-      .transform((value) => value.toLowerCase())
+      // .regex(/^[a-z]+$/, "Subdirectory must be lowercase")
+      .transform((value) => value.toLocaleLowerCase())
       .pipe(
         z.string().superRefine((email, ctx) => {
           if (typeof options?.isSubdirectoryUnique !== "function") {

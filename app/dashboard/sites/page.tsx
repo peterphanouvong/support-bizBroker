@@ -57,7 +57,7 @@ export default async function SitesRoute() {
           buttonText="Create Listing"
         />
       ) : (
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
           {data.map((listing) => (
             <Card key={listing.id}>
               <Image
@@ -68,8 +68,10 @@ export default async function SitesRoute() {
                 height={200}
               />
               <CardHeader>
-                <CardTitle>{listing.name}</CardTitle>
-                <CardDescription>{listing.description}</CardDescription>
+                <CardTitle className="truncate">{listing.name}</CardTitle>
+                <CardDescription className="line-clamp-3">
+                  {listing.description}
+                </CardDescription>
               </CardHeader>
               <CardFooter>
                 <Button asChild className="w-full">
