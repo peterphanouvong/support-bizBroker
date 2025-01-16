@@ -91,3 +91,32 @@ export async function DeletePost(formData: FormData) {
 
   return redirect(`/dashboard/sites/${formData.get("listingId")}`);
 }
+
+export async function UpdateImage(formData: FormData) {
+  const user = await requireUser();
+
+  const data = await prisma.listing.update({
+    where: {
+      userId: user.id,
+      id: formData.get("listingId") as string,
+    },
+    data: {
+      imageUrl: formData.get("imageUrl") as string,
+    },
+  });
+
+  return redirect(`/dashboard/sites/${formData.get("listingId")}`);
+}
+
+export async function DeleteListing(formData: FormData) {
+  const user = await requireUser();
+
+  const data = await prisma.listing.delete({
+    where: {
+      userId: user.id,
+      id: formData.get("listingId") as string,
+    },
+  });
+
+  return redirect(`/dashboard/sites`);
+}

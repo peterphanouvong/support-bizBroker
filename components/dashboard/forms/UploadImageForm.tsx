@@ -13,9 +13,14 @@ import Image from "next/image";
 import { useState } from "react";
 import { SubmitButton } from "../SubmitButtons";
 import { useToast } from "@/hooks/use-toast";
+import { UpdateImage } from "@/app/actions";
 
-export function UploadImageForm() {
-  const [imageUrl, setImageUrl] = useState<undefined | string>(undefined);
+interface iAppProps {
+  listingId: string;
+}
+
+export function UploadImageForm({ listingId }: iAppProps) {
+  const [imageUrl, setImageUrl] = useState<string>("");
   const { toast } = useToast();
   return (
     <Card>
@@ -53,7 +58,11 @@ export function UploadImageForm() {
         )}
       </CardContent>
       <CardFooter>
-        <SubmitButton variant="secondary" text="Change Image" />
+        <form action={UpdateImage}>
+          <input type="hidden" name="imageUrl" value={imageUrl} />
+          <input type="hidden" name="listingId" value={listingId} />
+          <SubmitButton variant="secondary" text="Change Image" />
+        </form>
       </CardFooter>
     </Card>
   );

@@ -55,6 +55,6 @@ model Post {
 
   User      User?    @relation(fields: [userId], references: [id])
   userId    String?
-  Listing   Listing? @relation(fields: [listingId], references: [id])
+  Listing   Listing? @relation(fields: [listingId], references: [id], onDelete: Cascade)
   listingId String?
 }
