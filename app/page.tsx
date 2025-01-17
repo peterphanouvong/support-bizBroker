@@ -1,3 +1,5 @@
+import { Hero } from "@/components/frontend/Hero";
+import { Logos } from "@/components/frontend/Logos";
 import { Button } from "@/components/ui/button";
 import {
   RegisterLink,
@@ -6,14 +8,9 @@ import {
 
 export default function Home() {
   return (
-    <div>
-      <h1>Home</h1>
-      <Button asChild>
-        <RegisterLink>Register</RegisterLink>
-      </Button>
-      <Button asChild>
-        <LoginLink>Login</LoginLink>
-      </Button>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+      <Hero />
+      <Logos />
     </div>
   );
 }
