@@ -82,16 +82,23 @@ export default async function ListingIdRoute(props: {
 
   const data = await getData(user.id, params.listingId);
 
-  console.log(data);
+  console.log(data, "data in [listingId] page");
 
   return (
     <>
       <div className="flex w-full justify-end gap-x-4">
         <Button asChild variant={"secondary"}>
-          <Link href={`/blog/${data[0].Listing?.subdirectory}`}>
-            <Book className="mr-2 size-4" />
-            View Blog
-          </Link>
+          {data?.[0]?.Listing?.subdirectory ? (
+            <Link href={`/blog/${data[0].Listing.subdirectory}`}>
+              <Book className="mr-2 size-4" />
+              View Blog
+            </Link>
+          ) : (
+            <Link href={`/dashboard/sites/${params.listingId}/create`}>
+              <Book className="mr-2 size-4" />
+              Create Article
+            </Link>
+          )}
         </Button>
         <Button asChild variant={"secondary"}>
           <Link href={`/dashboard/sites/${params.listingId}/settings`}>

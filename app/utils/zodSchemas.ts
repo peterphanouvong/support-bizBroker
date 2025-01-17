@@ -24,7 +24,21 @@ export function ListingCreationSchema(options?: {
       .min(1)
       .max(40)
       // .regex(/^[a-z]+$/, "Subdirectory must be lowercase")
-      .transform((value) => value.toLocaleLowerCase())
+      .transform(
+        (value) =>
+          value
+            .toLowerCase()
+            .trim()
+            .replace(/\s+/g, "-") // Replace spaces with hyphens
+            .replace(/[^a-z0-9-]/g, "") // Remove non-URL-safe characters
+      )
+      .refine(
+        (value) => /^[a-z0-9-]+$/.test(value), // Ensure only URL-safe characters
+        {
+          message:
+            "Subdirectory must contain only lowercase letters, numbers, or hyphens",
+        }
+      )
       .pipe(
         z.string().superRefine((email, ctx) => {
           if (typeof options?.isSubdirectoryUnique !== "function") {
