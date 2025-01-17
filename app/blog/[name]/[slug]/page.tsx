@@ -4,6 +4,11 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { RenderArticle } from "@/components/dashboard/RenderArticle";
+import { JSONContent } from "novel";
+
+// Same Error As always but not fixing
+// : Route "/blog/[name]/[slug]" used `params.name`. `params` should be awaited before using
 
 async function getData(slug: string) {
   const data = await prisma.post.findUnique({
@@ -26,14 +31,16 @@ async function getData(slug: string) {
   return data;
 }
 
-export default async function SlugRoute({
-  params,
-}: {
-  params: { slug: string; name: string };
+export default async function SlugRoute(props: {
+  params: Promise<{ name: string; slug: string }>;
 }) {
+  const params = await props.params;
+
   const data = await getData(params.slug);
   console.log(data);
-  const date = data.createdAt.toDateString();
+  const date = new Intl.DateTimeFormat("en-US", {
+    dateStyle: "medium",
+  }).format(data.createdAt);
   return (
     <>
       <div className="flex items-center gap-x-3 pt-10 pb-5">
@@ -68,6 +75,7 @@ export default async function SlugRoute({
           priority
         />
       </div>
+      <RenderArticle json={data.articleContent as JSONContent} />
     </>
   );
 }
