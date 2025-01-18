@@ -61,6 +61,7 @@ export function Hero() {
           <div className="relative items-center w-full py-12 mx-auto">
             <Image
               src={HeroImage}
+              priority
               alt="hero image"
               className=" relative w-full object-cover border rounded-lg shadow-2xl lg:rounded-3xl"
             />
