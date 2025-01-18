@@ -16,7 +16,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { ArrowLeft, Atom } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useActionState } from "react";
+import React, { useActionState, use } from "react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import TailwindEditor from "@/components/dashboard/EditorWrapper";
@@ -34,7 +34,7 @@ export default function ArticleCreationRoute({
   params: { listingId: string };
 }) {
   const [imageUrl, setImageUrl] = useState<undefined | string>(undefined);
-  const params = React.use(initialParams);
+  const params = use(initialParams);
   const { toast } = useToast();
   const [value, setValue] = useState<JSONContent | string>("");
   const [slug, setSlugValue] = useState<undefined | string>(undefined);
