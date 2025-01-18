@@ -31,7 +31,7 @@ import { SubmitButton } from "@/components/dashboard/SubmitButtons";
 export default function ArticleCreationRoute({
   params: initialParams,
 }: {
-  params: { listingId: string };
+  params: Promise<{ listingId: string }>;
 }) {
   const [imageUrl, setImageUrl] = useState<undefined | string>(undefined);
   const params = use(initialParams);
@@ -116,8 +116,8 @@ export default function ArticleCreationRoute({
               <Input
                 key={fields.slug.key}
                 name={fields.slug.name}
-                defaultValue={fields.slug.initialValue}
-                placeholder="Article Slug"
+                // defaultValue={fields.slug.initialValue}
+                placeholder="article-slug"
                 onChange={(e) => setSlugValue(e.target.value)}
                 value={slug}
               />
@@ -182,6 +182,7 @@ export default function ArticleCreationRoute({
               )}
               <p className="text-red-500 text-sm">{fields.coverImage.errors}</p>
             </div>
+
             <div className="grid gap-2">
               <Label>Article Content</Label>
               <input
@@ -191,7 +192,7 @@ export default function ArticleCreationRoute({
                 defaultValue={fields.articleContent.initialValue}
                 value={JSON.stringify(value)}
               />
-              <TailwindEditor onChange={setValue} initialValue={value} />
+              <TailwindEditor onChange={setValue} />
               <p className="text-red-500 text-sm">
                 {fields.articleContent.errors}
               </p>
