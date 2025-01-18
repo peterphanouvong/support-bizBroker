@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { Atom } from "lucide-react";
@@ -27,12 +28,14 @@ import { EditPostActions } from "@/app/actions";
 import slugify from "react-slugify";
 
 interface iAppProps {
-  title: string;
-  image: string;
-  id: string;
-  slug: string;
-  smallDescription: string;
-  articleContent: any;
+  data: {
+    slug: string;
+    title: string;
+    smallDescription: string;
+    articleContent: any;
+    id: string;
+    image: string;
+  };
   listingId: string;
 }
 

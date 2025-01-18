@@ -1,13 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 import { parseWithZod } from "@conform-to/zod";
-import {
-  ListingCreationSchema,
-  PostSchema,
-  siteSchema,
-} from "./utils/zodSchemas";
+import { ListingCreationSchema, PostSchema } from "./utils/zodSchemas";
 import { prisma } from "@/lib/prisma";
 import { requireUser } from "./utils/requireUser";
 
@@ -40,6 +36,7 @@ export async function CreateListingAction(prevState: any, formData: FormData) {
     },
   });
 
+  void response; // Prevents TS unused variable error
   return redirect(`/dashboard/sites`);
 }
 
@@ -64,6 +61,7 @@ export async function CreatePostAction(prevState: any, formData: FormData) {
     },
   });
 
+  void data; // Prevents TS unused variable error
   return redirect(`/dashboard/sites/${formData.get("listingId")}`);
 }
 
@@ -90,6 +88,7 @@ export async function EditPostActions(prevState: any, formData: FormData) {
     },
   });
 
+  void data; // Prevents TS unused variable error
   return redirect(`/dashboard/sites/${formData.get("listingId")}`);
 }
 
@@ -104,6 +103,7 @@ export async function DeletePost(formData: FormData) {
     },
   });
 
+  void data; // Prevents TS unused variable error
   return redirect(`/dashboard/sites/${formData.get("listingId")}`);
 }
 
@@ -120,6 +120,8 @@ export async function UpdateImage(formData: FormData) {
     },
   });
 
+  void data; // Prevents TS unused variable error
+
   return redirect(`/dashboard/sites/${formData.get("listingId")}`);
 }
 
@@ -132,6 +134,8 @@ export async function DeleteListing(formData: FormData) {
       id: formData.get("listingId") as string,
     },
   });
+
+  void data; // Prevents TS unused variable error
 
   return redirect(`/dashboard/sites`);
 }
