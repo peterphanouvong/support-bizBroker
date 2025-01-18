@@ -9,7 +9,7 @@ import {
 import { prisma } from "@/lib/prisma";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
-import { FileIcon, PlusCircle } from "lucide-react";
+import { PlusCircle } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import Image from "next/image";

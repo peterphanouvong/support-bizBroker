@@ -8,13 +8,7 @@ import {
 } from "@/components/ui/card";
 import { prisma } from "@/lib/prisma";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import {
-  Book,
-  FileIcon,
-  MoreHorizontal,
-  PlusCircle,
-  Settings,
-} from "lucide-react";
+import { Book, MoreHorizontal, PlusCircle, Settings } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import Image from "next/image";

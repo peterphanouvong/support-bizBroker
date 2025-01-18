@@ -1,11 +1,7 @@
 import { Features } from "@/components/frontend/Features";
 import { Hero } from "@/components/frontend/Hero";
 import { Logos } from "@/components/frontend/Logos";
-import { Button } from "@/components/ui/button";
-import {
-  RegisterLink,
-  LoginLink,
-} from "@kinde-oss/kinde-auth-nextjs/components";
+
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 

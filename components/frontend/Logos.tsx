@@ -1,7 +1,6 @@
 import Image from "next/image";
 import KindeLogo from "@/public/kinde.svg";
 import VercelLogo from "@/public/vercel.svg";
-import NextLogo from "@/public/logo.svg";
 
 export function Logos() {
   return (

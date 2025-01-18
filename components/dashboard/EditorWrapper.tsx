@@ -9,7 +9,7 @@ import {
   EditorRoot,
   JSONContent,
 } from "novel";
-import { useState } from "react";
+
 import { defaultExtensions } from "./extensions";
 import { slashCommand, suggestionItems } from "./SlashCommand";
 import { handleCommandNavigation } from "novel/extensions";
