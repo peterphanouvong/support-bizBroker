@@ -29,11 +29,10 @@ async function getData(postId: string) {
   return data;
 }
 
-export default async function EditRoute({
-  params,
-}: {
-  params: { articleId: string; listingId: string };
+export default async function EditRoute(props: {
+  params: Promise<{ listingId: string; articleId: string }>;
 }) {
+  const params = await props.params;
   const data = await getData(params.articleId);
   return (
     <div>

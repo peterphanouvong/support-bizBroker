@@ -10,11 +10,12 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 
-export default async function DeleteForm({
-  params,
-}: {
-  params: { listingId: string; articleId: string };
+export default async function DeleteForm(props: {
+  params: Promise<{ listingId: string; articleId: string }>;
 }) {
+  const params = await props.params;
+  console.log("Params from inside DeleteForm:", params);
+
   return (
     <div className="flex flex-1 items-center justify-center">
       <Card className="max-w-xl">
