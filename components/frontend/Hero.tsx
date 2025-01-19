@@ -26,7 +26,7 @@ export function Hero() {
         </div>
         <nav className="hidden md:flex md:justify-end md:space-x-4">
           <ModeToggle />
-          <LoginLink>
+          <LoginLink postLoginRedirectURL="/api/auth/creation">
             <Button variant="secondary">Log In</Button>
           </LoginLink>
           <RegisterLink>
@@ -50,7 +50,7 @@ export function Hero() {
               Setting up listings is hard and time consuming, but not here.
             </p>
             <div className="flex items-center w-full justify-center gap-x-4 mt-5">
-              <LoginLink>
+              <LoginLink postLoginRedirectURL="/api/auth/creation">
                 <Button variant="secondary">Log In</Button>
               </LoginLink>
               <RegisterLink>
