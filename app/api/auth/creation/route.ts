@@ -8,11 +8,13 @@ export async function GET() {
   if (!user || user === null || !user.id) {
     throw new Error("User not found");
   }
+
   let dbUser = await prisma.user.findUnique({
     where: {
       id: user.id,
     },
   });
+
   if (!dbUser) {
     dbUser = await prisma.user.create({
       data: {
